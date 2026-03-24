@@ -1,4 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container mt-4">
+{% for i in data %}
+<div class="table-responsive">
+<table class="table table-striped table-hover table-bordered">
+<thead class="table-dark">
+<tr>
+<th>Title of activity</th>
+<th>Team leader</th>
+<th>Duration</th>
+<th>List of collaborators</th>
+<th>Is finished</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{ i.job }}</td>
+<td>{{ i.team_leader }}</td>
+<td>{{ i.duration }}</td>
+<td>{{ i.collaborators }}</td>
+<td>
+{% if i.is_finished %}
+<span class="badge bg-success">Yes</span>
+{% else %}
+<span class="badge bg-warning">No</span>
+{% endif %}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+{% endfor %}
+</div>
 {% endblock %}
