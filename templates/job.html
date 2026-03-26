@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Создать/Редактировать работу</h1>
+<form action="" method="post">
+{{ form.hidden_tag() }}
+
+<div class="mb-3">
+{{ form.job.label(class="form-label") }}
+{{ form.job(class="form-control") }}
+</div>
+
+<div class="mb-3">
+{{ form.team_leader.label(class="form-label") }}
+{{ form.team_leader(class="form-control") }}
+</div>
+
+<div class="mb-3">
+{{ form.collaborators.label(class="form-label") }}
+{{ form.collaborators(class="form-control") }}
+</div>
+
+<div class="mb-3">
+{{ form.work_size.label(class="form-label") }}
+{{ form.work_size(class="form-control") }}
+</div>
+
+<div class="mb-3 form-check">
+{{ form.is_finished(class="form-check-input") }}
+{{ form.is_finished.label(class="form-check-label") }}
+</div>
+
+{{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

@@ -14,4 +14,5 @@ class Jobs(SqlAlchemyBase):
     collaborators = sqlalchemy.Column(sqlalchemy.Text)
     start_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     end_date = sqlalchemy.Column(sqlalchemy.DateTime)
+    creator_id = sqlalchemy.Column(sqlalchemy.Integer, default=1)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean)
