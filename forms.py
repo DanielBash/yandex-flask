@@ -30,3 +30,11 @@ class JobForm(FlaskForm):
     work_size = IntegerField('Длительность работы', validators=[DataRequired()])
     is_finished = BooleanField('Работа закончена?')
     submit = SubmitField('Ура, сверхурочные!')
+
+
+class DepartmentForm(FlaskForm):
+    title = StringField('Название Департамента', validators=[DataRequired()])
+    chief = IntegerField('Глава Департамента', validators=[DataRequired()])
+    members = StringField('Члены Департамента', validators=[DataRequired()])
+    email = EmailField('Почта Департамента', validators=[DataRequired()])
+    submit = SubmitField('Создать департамент')

@@ -10,9 +10,7 @@ class Department(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     chief = sqlalchemy.Column(sqlalchemy.Integer)
+    creator_id = sqlalchemy.Column(sqlalchemy.Integer)
     members = sqlalchemy.Column(sqlalchemy.Text)
     title = sqlalchemy.Column(sqlalchemy.Text)
     email = sqlalchemy.Column(sqlalchemy.Text)
-
-    user_id = sqlalchemy.Column(sqlalchemy.Integer,
-                                sqlalchemy.ForeignKey("users.id"))
