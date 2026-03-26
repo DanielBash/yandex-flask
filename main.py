@@ -31,7 +31,7 @@ def register():
         user = User(
             surname=form.surname.data,
             name=form.name.data,
-            age=int(form.age.data),  # конвертируем в int
+            age=int(form.age.data),
             position=form.position.data,
             speciality=form.speciality.data,
             address=form.address.data,
