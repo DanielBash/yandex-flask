@@ -15,4 +15,12 @@ class Jobs(SqlAlchemyBase):
     start_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     end_date = sqlalchemy.Column(sqlalchemy.DateTime)
     creator_id = sqlalchemy.Column(sqlalchemy.Integer, default=1)
+    category = sqlalchemy.Column(sqlalchemy.Integer)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean)
+
+
+class JobCategory(SqlAlchemyBase):
+    __tablename__ = 'categories'
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    name = sqlalchemy.Column(sqlalchemy.Text)

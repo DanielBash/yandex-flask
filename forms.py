@@ -28,6 +28,7 @@ class JobForm(FlaskForm):
     team_leader = IntegerField('Капитан команды', validators=[DataRequired()])
     collaborators = StringField('Участники', validators=[DataRequired()])
     work_size = IntegerField('Длительность работы', validators=[DataRequired()])
+    category = IntegerField('Категория', validators=[DataRequired()])
     is_finished = BooleanField('Работа закончена?')
     submit = SubmitField('Ура, сверхурочные!')
 

@@ -91,6 +91,7 @@ def addjob():
             collaborators=form.collaborators.data,
             team_leader=form.team_leader.data,
             work_size=form.work_size.data,
+            category=form.category.data
         )
 
         session.add(job)
@@ -120,6 +121,7 @@ def editjob(job_id):
         job.team_leader = form.team_leader.data
         job.work_size = form.work_size.data
         job.creator_id = current_user.id
+        job.category = form.category.data
 
         session.commit()
         session.close()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd yandex-flask || exit
+cd yandex-flask
 export PORT=5000
 unset PIP_USER
 

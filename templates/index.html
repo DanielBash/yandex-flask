@@ -11,6 +11,7 @@
 <th>Капитан</th>
 <th>Длительность</th>
 <th>Список участников</th>
+<th>Категория</th>
 <th>Закончено?</th>
 </tr>
 </thead>
@@ -20,6 +21,7 @@
 <td>{{ i.team_leader }}</td>
 <td>{{ i.duration }}</td>
 <td>{{ i.collaborators }}</td>
+<td>{{ i.category }}</td>
 <td>
 {% if i.is_finished %}
 <span class="badge bg-success">Да</span>
