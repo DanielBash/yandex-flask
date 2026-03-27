@@ -69,6 +69,58 @@ def test_add_job_wrong_team_leader():
     ).json()
 
 
+def test_delete_job():
+    """Тест удаления работы"""
+    response = requests.delete(
+        "http://127.0.0.1:5000/api/jobs/delete/1").json()
+
+
+def test_edit_job():
+    """Редактирование работы"""
+    params = {
+        "job": "Updated login system",
+        "team_leader": 1,
+        "collaborators": "2, 3",
+        "is_finished": "true",
+        "work_size": 15,
+        "category": 2
+    }
+    response = requests.put(
+        "http://127.0.0.1:5000/api/jobs/1",
+        params=params
+    )
+
+
+def test_edit_job_not_found():
+    """Редактирование несуществующей работы"""
+    params = {"job": "Nonexistent update"}
+    response = requests.put(
+        "http://127.0.0.1:5000/api/jobs/999",
+        params=params
+    )
+
+
+def test_edit_job_wrong_work_size():
+    """Редактирование с неверной сложностью"""
+    params = {
+        "job": "Bad work_size",
+        "work_size": "abc"
+    }
+    response = requests.put(
+        "http://127.0.0.1:5000/api/jobs/1",
+        params=params
+    )
+
+
+def test_edit_job_partial():
+    """Частичное редактирование (только job)"""
+    params = {"job": "Partial update"}
+    response = requests.put(
+        "http://127.0.0.1:5000/api/jobs/1",
+        params=params
+    )
+
+
 for i in list(globals()):
     if i.startswith('test_'):
         print(f'{i}: {globals()[i].__doc__}')
