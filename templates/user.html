@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ user.surname }} {{ user.name }}</h1>
+<h2>{{ user.city_from }}</h2>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=4a40f69c-c18d-4980-80e5-36f901c01fc3&lang=ru_RU"></script>
+<script>
+    ymaps.ready(init);
+
+    function init() {
+        var city = '{{ user.city_from }}';
+
+        ymaps.geocode(city, { results: 1 })
+            .then(function (res) {
+                var firstGeoObject = res.geoObjects.get(0);
+
+                var myMap = new ymaps.Map('map', {
+                    center: firstGeoObject.geometry.getCoordinates(),
+                    zoom: 10
+                });
+
+                myMap.geoObjects.add(firstGeoObject);
+            })
+            .catch(function (err) {
+                console.error('Ошибка геокодирования:', err);
+                var myMap = new ymaps.Map('map', {
+                    center: [37.6173, 55.7558],
+                    zoom: 10
+                });
+            });
+    }
+</script>
+<div id="map" style="width: 600px; height: 400px"></div>
+{% endblock %}

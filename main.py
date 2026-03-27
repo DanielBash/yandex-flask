@@ -55,6 +55,7 @@ def register():
             speciality=form.speciality.data,
             address=form.address.data,
             email=form.email.data,
+            city_from=form.city_from.data,
             hashed_password=generate_password_hash(form.password.data)
         )
 
@@ -129,6 +130,17 @@ def editjob(job_id):
         return redirect(url_for('index'))
     return render_template('job.html', form=form)
 
+@app.route('/users_show/<int:user_id>', methods=['GET'])
+@login_required
+def users_show(user_id):
+    session = db_session.create_session()
+
+    try:
+        user = session.get(User, user_id)
+    except Exception as e:
+        return redirect(url_for('index'))
+
+    return render_template('user.html', user=user)
 
 @app.route('/logout')
 @login_required
