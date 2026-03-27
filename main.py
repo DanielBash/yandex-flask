@@ -3,6 +3,7 @@ import datetime
 from flask import Flask, redirect, url_for, make_response, jsonify
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_restful import Api
 from werkzeug.security import generate_password_hash
 
 import mars_api
@@ -11,6 +12,8 @@ from data.departments import Department
 from data.jobs import Jobs
 from data.users import User
 from forms import LoginForm, RegisterForm, JobForm, DepartmentForm
+from job_resource import JobsListResource, JobsResource
+from user_resource import UsersListResource, UsersResource
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -19,6 +22,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(
 )
 login_manager = LoginManager()
 login_manager.init_app(app)
+api = Api(app)
 
 
 @login_manager.user_loader
@@ -272,4 +276,8 @@ def bad_request(_):
 if __name__ == '__main__':
     db_session.global_init('db/database.sqlite3')
     app.register_blueprint(mars_api.blueprint)
+    api.add_resource(UsersListResource, '/api/v2/users')
+    api.add_resource(UsersResource, '/api/v2/users/<int:user_id>')
+    api.add_resource(JobsListResource, '/api/jobs')
+    api.add_resource(JobsResource, '/api/jobs/<int:job_id>')
     main()
