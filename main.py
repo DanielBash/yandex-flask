@@ -1,10 +1,11 @@
 import datetime
 
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, make_response, jsonify
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash
 
+import mars_api
 from data import db_session
 from data.departments import Department
 from data.jobs import Jobs
@@ -244,9 +245,19 @@ def departments():
 
 
 def main():
-    app.run()
+    app.run(port=5000)
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 
 if __name__ == '__main__':
     db_session.global_init('db/database.sqlite3')
+    app.register_blueprint(mars_api.blueprint)
     main()
